@@ -36,5 +36,13 @@ module.exports = {
             template: "./index.html",
             filename: "./index.html"
         })
-    ]
+    ],
+    devServer: {
+        stats: "errors-only",
+        overlay: true,
+        contentBase: path.join(__dirname, 'dist'),
+        host: process.env.HOST,
+        port: process.env.PORT,
+        open: true,
+    }
 };
