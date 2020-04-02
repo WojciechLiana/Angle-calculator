@@ -22,7 +22,13 @@ function Portal() {
 
     const checkIf90 = (angle) => angle < 90 ? 'TAK': 'NIE';
     const roundNumber = (number)=>Math.round(number*Math.pow(10, 2))/Math.pow(10, 2);
-    const normalize = (angle) => angle >= 360 ? angle-Math.floor(angle/360)*360 : angle;
+    const normalizeAngle = (angle) => angle >= 360 ? angle-Math.floor(angle/360)*360 : angle;
+    const normalizeRadian = (radian) => radian >= 6.28 ? radian-Math.floor(radian/6.26)*6.28 : radian;
+
+    const normalize = ()=>{
+      setAngle(normalizeAngle(angle));
+      setRadian(normalizeRadian(radian));
+    };
 
 
     return (
@@ -30,7 +36,7 @@ function Portal() {
             <Stopien angle={roundNumber(angle)} handleChange={(angle)=>handleChangeAngle(angle)}/>
             <Radian radian={roundNumber(radian)} handleChange={(radian)=>handleChangeRadian(radian)}/>
             <div>Kat mniejszy niz 90? : {checkIf90(angle)}</div>
-            <button onClick={()=>setAngle(normalize(angle))}>Normalize</button>
+            <button onClick={()=>normalize()}>Normalize</button>
         </div>
 
     );
