@@ -52,8 +52,12 @@ function Radian({radian, handleChange}) {
 
 function Display({angle, handleChange}){
     return(
-        <input type='number' value={angle} onChange={(e)=>handleChange(e.target.value)}/>
+        <input type='number' value={angle} onChange={(e)=>handleChange(e.target.value)} onClick={(e)=>selectText(e)}/>
     );
+}
+
+function selectText(e) {
+    e.target.select();
 }
 
 export default Portal;
