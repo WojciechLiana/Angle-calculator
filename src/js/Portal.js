@@ -4,7 +4,7 @@ import "../scss/style.scss";
 
 function Portal() {
 
-    const [angle, setAngle] = useState(0);
+    const [angle, setAngle] = useState('');
     const [radian, setRadian] = useState('');
 
     const calcToRadian = (angle) => setRadian(angle/180*Math.PI);
@@ -23,20 +23,20 @@ function Portal() {
     const checkIf90 = (angle) => angle < 90 ? 'TAK': 'NIE';
     const roundNumber = (number)=>Math.round(number*Math.pow(10, 2))/Math.pow(10, 2);
     const normalizeAngle = (angle) => angle >= 360 ? angle-Math.floor(angle/360)*360 : angle;
-    const normalizeRadian = (radian) => radian >= 6.28 ? radian-Math.floor(radian/6.26)*6.28 : radian;
+    const normalizeRadian = (radian) => radian >= 6.28 ? radian-Math.floor(radian/6.28)*6.28 : radian;
+    const isNormalizeDisabled = (angle) => angle <= 360;
 
     const normalize = ()=>{
       setAngle(normalizeAngle(angle));
       setRadian(normalizeRadian(radian));
     };
 
-
     return (
         <div>
             <Stopien angle={roundNumber(angle)} handleChange={(angle)=>handleChangeAngle(angle)}/>
             <Radian radian={roundNumber(radian)} handleChange={(radian)=>handleChangeRadian(radian)}/>
             <div>Kat mniejszy niz 90? : {checkIf90(angle)}</div>
-            <button onClick={()=>normalize()}>Normalize</button>
+            <button onClick={()=>normalize()} disabled={isNormalizeDisabled(angle)}>Normalize</button>
         </div>
 
     );
@@ -52,9 +52,8 @@ function Radian({radian, handleChange}) {
 
 function Display({angle, handleChange}){
     return(
-        <input value={angle} onChange={(e)=>handleChange(e.target.value)}/>
+        <input type='number' value={angle} onChange={(e)=>handleChange(e.target.value)}/>
     );
 }
-
 
 export default Portal;
